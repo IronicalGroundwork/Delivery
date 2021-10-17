@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "220488772876",
+    "project_id": "delivery-5926b",
+    "storage_bucket": "delivery-5926b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220488772876:android:07a33f313eb2a2ae056d29",
+        "android_client_info": {
+          "package_name": "com.ironical_groundwork.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220488772876-506qge65khmvkeb43lui415s41hi6pk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaEAgBYX7ArmVK2BULLVbIEQrIivFLr1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220488772876-506qge65khmvkeb43lui415s41hi6pk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
