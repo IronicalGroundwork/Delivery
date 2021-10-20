@@ -10,9 +10,9 @@ interface DeliveryApi {
 
     @POST("login.php?post_login")
     @FormUrlEncoded
-    fun postLogin(
+    suspend fun pushPostLogin(
         @Field("code") code: String,
-        @Field("onesignal") userId: String?,
+        @Field("onesignal") userId: String,
         @Field("phone") phoneName: String
     ): Response<Login>
 
