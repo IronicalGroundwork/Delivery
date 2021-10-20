@@ -1,4 +1,4 @@
-package com.ironical_groundwork.delivery.activity
+package com.ironical_groundwork.delivery.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Context

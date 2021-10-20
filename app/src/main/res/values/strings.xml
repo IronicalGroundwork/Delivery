@@ -8,11 +8,19 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <!-- Меню -->
+    <string name="menu_route">Рейсы</string>
+    <string name="menu_order">Заказы</string>
+    <string name="menu_map">Карта</string>
+    <string name="menu_chat">Чат</string>
+    <string name="menu_archive">Архив</string>
+    <string name="menu_setting">Настройки</string>
+
+    <!-- Авторизация -->
     <string name="title_authorization">Авторизация</string>
     <string name="title_enter_code">Введите ваш код</string>
     <string name="title_enter_code_description">Ваш код авторизации можно плучить у разработчика</string>
     <string name="button_resume">Продолжить</string>
+
+    <string name="title_count">Количество заказов:</string>
 </resources>

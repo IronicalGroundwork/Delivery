@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_route">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.ironical_groundwork.delivery.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_route"
+        android:name="com.ironical_groundwork.delivery.ui.fragment.RouteFragment"
+        android:label="@string/menu_route"
+        tools:layout="@layout/fragment_route" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.ironical_groundwork.delivery.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_archive"
+        android:name="com.ironical_groundwork.delivery.ui.fragment.ArchiveFragment"
+        android:label="@string/menu_archive"
+        tools:layout="@layout/fragment_archive" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.ironical_groundwork.delivery.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_settings"
+        android:name="com.ironical_groundwork.delivery.ui.fragment.SettingsFragment"
+        android:label="@string/menu_setting"
+        tools:layout="@layout/fragment_setting" />
+
 </navigation>
