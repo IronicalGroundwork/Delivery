@@ -1,64 +1,48 @@
 package com.ironical_groundwork.delivery.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.ironical_groundwork.delivery.data.DeliveryDao
-import com.ironical_groundwork.delivery.model.Order
-import com.ironical_groundwork.delivery.model.Product
-import com.ironical_groundwork.delivery.model.Route
+import com.ironical_groundwork.delivery.model.*
+import kotlinx.coroutines.flow.Flow
 
 class DataRepository(private val deliveryDao: DeliveryDao) {
 
     val readAllRoute: LiveData<List<Route>> = deliveryDao.readAllRoute()
+    val readAllOrder: LiveData<List<Order>> = deliveryDao.readAllOrder()
+    val readAllProduct: LiveData<List<Product>> = deliveryDao.readAllProduct()
 
-    suspend fun addRoute(route: Route) {
-        deliveryDao.addRoute(route)
-    }
 
-    suspend fun addAllRoute(routeList: List<Route>) {
-        deliveryDao.addAllRoute(routeList)
+    suspend fun updateAllData(data: RouteResponse) {
+        deliveryDao.addAllRoute(data.routeList)
+        deliveryDao.addAllOrder(data.orderList)
+        deliveryDao.addAllProduct(data.productList)
+
+        val idRouteList = mutableListOf<Int>()
+        data.routeList.forEach {
+            idRouteList.add(it.id)
+        }
+
+        val idOrderList = mutableListOf<Int>()
+        data.orderList.forEach {
+            idOrderList.add(it.id)
+        }
+
+        val idProductList = mutableListOf<Int>()
+        data.productList.forEach {
+            idProductList.add(it.id)
+        }
+
+        deliveryDao.deleteRouteNotIn(idRouteList)
+        deliveryDao.deleteOrderNotIn(idOrderList)
+        deliveryDao.deleteProductNotIn(idProductList)
     }
 
     suspend fun updateRoute(route: Route) {
-        deliveryDao.updateRoute(route)
+       deliveryDao.updateRoute(route)
     }
 
-    suspend fun updateAllRoute(routeList: List<Route>) {
-        deliveryDao.updateAllRoute(routeList)
-    }
-
-    suspend fun deleteRoute(route: Route) {
-        deliveryDao.deleteRoute(route)
-    }
-
-    suspend fun deleteRouteNotIn(idList: List<Int>) {
-        deliveryDao.deleteRouteNotIn(idList)
-    }
-
-    suspend fun deleteAllRoute() {
-        deliveryDao.deleteAllRoute()
-    }
-
-    suspend fun addAllOrder(orderList: List<Order>) {
-        deliveryDao.addAllOrder(orderList)
-    }
-
-    suspend fun updateAllOrder(orderList: List<Order>) {
-        deliveryDao.updateAllOrder(orderList)
-    }
-
-    suspend fun deleteOrderNotIn(idList: List<Int>) {
-        deliveryDao.deleteOrderNotIn(idList)
-    }
-
-    suspend fun addAllProduct(productList: List<Product>) {
-        deliveryDao.addAllProduct(productList)
-    }
-
-    suspend fun updateAllProduct(productList: List<Product>) {
-        deliveryDao.updateAllProduct(productList)
-    }
-
-    suspend fun deleteProductNotIn(idList: List<Int>) {
-        deliveryDao.deleteProductNotIn(idList)
+    fun readDistrict(routeId: Int): Flow<List<District>> {
+        return deliveryDao.readDistrict(routeId)
     }
 }

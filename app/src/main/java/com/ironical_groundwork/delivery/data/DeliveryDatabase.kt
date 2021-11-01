@@ -8,7 +8,7 @@ import com.ironical_groundwork.delivery.model.Order
 import com.ironical_groundwork.delivery.model.Product
 import com.ironical_groundwork.delivery.model.Route
 
-@Database(entities = [Route::class, Order::class, Product::class], version = 2, exportSchema = false)
+@Database(entities = [Route::class, Order::class, Product::class], version = 11, exportSchema = false)
 abstract class DeliveryDatabase: RoomDatabase() {
     abstract fun deliveryDao(): DeliveryDao
 

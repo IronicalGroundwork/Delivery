@@ -9,7 +9,27 @@
         android:id="@+id/nav_route"
         android:name="com.ironical_groundwork.delivery.ui.fragment.RouteFragment"
         android:label="@string/menu_route"
-        tools:layout="@layout/fragment_route" />
+        tools:layout="@layout/fragment_route" >
+        <action
+            android:id="@+id/action_nav_route_to_nav_district"
+            app:destination="@id/nav_district" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_district"
+        android:name="com.ironical_groundwork.delivery.ui.fragment.DistrictFragment"
+        android:label=""
+        tools:layout="@layout/fragment_district" >
+        <action
+            android:id="@+id/action_nav_district_to_nav_order"
+            app:destination="@id/nav_order" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_order"
+        android:name="com.ironical_groundwork.delivery.ui.fragment.OrderFragment"
+        android:label=""
+        tools:layout="@layout/fragment_order" />
 
     <fragment
         android:id="@+id/nav_archive"
@@ -22,5 +42,6 @@
         android:name="com.ironical_groundwork.delivery.ui.fragment.SettingsFragment"
         android:label="@string/menu_setting"
         tools:layout="@layout/fragment_setting" />
+
 
 </navigation>

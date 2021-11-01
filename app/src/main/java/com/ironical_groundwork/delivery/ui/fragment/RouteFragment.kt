@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ironical_groundwork.delivery.MainActivity
+import com.ironical_groundwork.delivery.R
+import com.ironical_groundwork.delivery.adapter.RouteDelegate
 import com.ironical_groundwork.delivery.adapter.RouteListAdapter
 import com.ironical_groundwork.delivery.databinding.FragmentRouteBinding
 import com.ironical_groundwork.delivery.model.*
@@ -30,7 +33,6 @@ class RouteFragment : Fragment() {
     private lateinit var binding: FragmentRouteBinding
     private val routeListAdapter by lazy { RouteListAdapter() }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,27 +49,11 @@ class RouteFragment : Fragment() {
 
         setupRecyclerview()
 
-        dataViewModel.readAllRoute.observe(viewLifecycleOwner, Observer { routeList ->
-            routeListAdapter.setData(routeList)
-        })
-
         onRefresh()
 
         getRoute()
 
         return binding.root
-    }
-
-    private fun onRefresh() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            Handler().postDelayed({
-
-                binding.swipeRefreshLayout.isRefreshing = false
-
-                getRoute()
-
-            }, 500)
-        }
     }
 
     private fun getRoute() {
@@ -76,12 +62,9 @@ class RouteFragment : Fragment() {
             val sharedPreferences = requireActivity().getSharedPreferences("login", Context.MODE_PRIVATE)
 
             when (sharedPreferences.getInt("status", 0)) {
-                0 -> apiViewModel.getAllRouteList()
-                1 -> apiViewModel.getAllRouteList()
-                2 -> apiViewModel.getRouteList(sharedPreferences.getInt("id", 0))
-                3 -> apiViewModel.getRouteList(sharedPreferences.getInt("id", 0))
+                0, 1 -> apiViewModel.getAllRouteList()
+                2, 3 -> apiViewModel.getRouteList(sharedPreferences.getInt("id", 0))
             }
-
 
             apiViewModel.routeResponse.observe(requireActivity(), { response ->
                 if(response.isSuccessful) {
@@ -100,9 +83,42 @@ class RouteFragment : Fragment() {
         }
     }
 
+    private fun onRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            Handler().postDelayed({
+
+                binding.swipeRefreshLayout.isRefreshing = false
+
+                getRoute()
+
+            }, 500)
+        }
+    }
+
+    fun navigateToRoute(routeId: Int, routeNumber: String?){
+        val bundle = Bundle()
+        bundle.putInt("routeId", routeId)
+        bundle.putString("routeName", routeNumber)
+        findNavController().navigate(
+            R.id.action_nav_route_to_nav_district,
+            bundle
+        )
+    }
+
     private fun setupRecyclerview() {
         binding.recyclerView.adapter = routeListAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        routeListAdapter.attachDelegate(object: RouteDelegate {
+            override fun openRoute(routeId: Int, routeNumber: String?) {
+                navigateToRoute(routeId, routeNumber)
+            }
+        })
+
+        dataViewModel.readAllRoute.observe(viewLifecycleOwner, { routeList ->
+            routeListAdapter.setData(routeList)
+        })
+
     }
 
 }
